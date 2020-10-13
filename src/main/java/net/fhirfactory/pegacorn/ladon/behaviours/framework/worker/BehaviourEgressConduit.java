@@ -24,7 +24,7 @@ package net.fhirfactory.pegacorn.ladon.behaviours.framework.worker;
 
 import net.fhirfactory.pegacorn.ladon.behaviours.framework.model.BehaviourRouteNames;
 import net.fhirfactory.pegacorn.ladon.processingplant.LadonProcessingPlant;
-import net.fhirfactory.pegacorn.ladon.statespace.stimuli.model.StimulusPackage;
+import net.fhirfactory.pegacorn.ladon.statespace.stimuli.model.Stimulus;
 import net.fhirfactory.pegacorn.petasos.core.moa.pathway.naming.PetasosPathwayExchangePropertyNames;
 import org.apache.camel.Exchange;
 import org.slf4j.Logger;
@@ -55,7 +55,7 @@ public class BehaviourEgressConduit {
      * @param behaviourName The Behaviour name - an absolutely unique name for the instance of the Behaviour within the entiry deployment.
      * @return A Stimulus object for injecting into other Behaviours
      */
-    public StimulusPackage extractStimulus(StimulusPackage incomingStimulusPackage, Exchange camelExchange, String behaviourName) {
+    public Stimulus extractStimulus(Stimulus incomingStimulusPackage, Exchange camelExchange, String behaviourName) {
         LOG.debug(".extractStimulus(): Entry, incomingStimulus (Stimulus) --> {}, behaviourName (String) --> {}", incomingStimulusPackage, behaviourName);
         // Get my Petasos Context
         if( ladonServices == null ) {

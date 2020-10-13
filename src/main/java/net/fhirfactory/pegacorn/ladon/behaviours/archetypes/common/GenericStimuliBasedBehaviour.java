@@ -26,10 +26,9 @@ import net.fhirfactory.pegacorn.ladon.model.behaviours.ExplicitStimulus2TwinInst
 import net.fhirfactory.pegacorn.ladon.model.stimuli.StimulusType;
 import net.fhirfactory.pegacorn.ladon.statespace.stimuli.model.BehaviourCentricExclusiveFilterRulesInterface;
 import net.fhirfactory.pegacorn.ladon.statespace.stimuli.model.BehaviourCentricInclusiveFilterRulesInterface;
-import net.fhirfactory.pegacorn.ladon.statespace.twinpathway.stimulicollector.common.TwinStimuliCollectorBase;
-import net.fhirfactory.pegacorn.ladon.statespace.twinpathway.twinorchestrator.common.TwinOrchestratorBase;
+import net.fhirfactory.pegacorn.ladon.statespace.twinpathway.provocations.workers.base.TwinTypeProvocationArchetypeWUP;
+import net.fhirfactory.pegacorn.ladon.statespace.twinpathway.orchestrator.common.TwinOrchestratorBase;
 import net.fhirfactory.pegacorn.petasos.model.topics.TopicToken;
-import net.fhirfactory.pegacorn.petasos.wup.archetypes.LadonStimuliTriggeredBehaviourWUP;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -55,7 +54,7 @@ public abstract class GenericStimuliBasedBehaviour extends LadonStimuliTriggered
     abstract protected List<BehaviourCentricExclusiveFilterRulesInterface> negativeFilterSet();
     abstract protected List<BehaviourCentricInclusiveFilterRulesInterface> positiveFilterSet();
 
-    abstract protected TwinStimuliCollectorBase getMyCollectorService();
+    abstract protected TwinTypeProvocationArchetypeWUP getMyCollectorService();
     abstract protected TwinOrchestratorBase getMyTwinOrchestrationService();
 
     /**
@@ -89,6 +88,9 @@ public abstract class GenericStimuliBasedBehaviour extends LadonStimuliTriggered
                 LOG.trace(".specifySubscriptionTopics(): Topic added... continue");
             }
         }
+        //
+        // Next: iterate through each Interface Instances
+        //
         LOG.trace(".specifySubscriptionTopics(): Now iterate through each Interface Instance");
         for(BehaviourCentricInclusiveFilterRulesInterface positiveFilterRulesInterface: positiveFilterSet()){
             LOG.trace(".specifySubscriptionTopics(): Get the BehaviourStimulusRequirementSet for each interface instance");
@@ -108,14 +110,14 @@ public abstract class GenericStimuliBasedBehaviour extends LadonStimuliTriggered
             }
         }
         //
-        // Now, lets inject the BehaviourStimulusSubscription into the appropriate DigitalTwinOrchestrator instance
+        // Next: lets inject the BehaviourStimulusSubscription into the appropriate DigitalTwinOrchestrator instance
         //
         for(BehaviourCentricInclusiveFilterRulesInterface criteriaInterface: positiveFilterSet()){
             LOG.trace(".specifySubscriptionTopics(): Get the BehaviourStimulusRequirementSet for each interface instance");
             getMyTwinOrchestrationService().registerBehaviourStimulusSubscription(criteriaInterface);
         }
         //
-        // Lastly, return an empty set.
+        // Lastly: return an empty set.
         //
         HashSet<TopicToken> myTopics = new HashSet<TopicToken>();
         LOG.debug(".specifySubscriptionTopics(): Exit");

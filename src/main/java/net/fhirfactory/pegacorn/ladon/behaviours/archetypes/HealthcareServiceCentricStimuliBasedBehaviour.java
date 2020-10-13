@@ -22,22 +22,22 @@
 package net.fhirfactory.pegacorn.ladon.behaviours.archetypes;
 
 import net.fhirfactory.pegacorn.ladon.behaviours.archetypes.common.GenericStimuliBasedBehaviour;
-import net.fhirfactory.pegacorn.ladon.statespace.twinpathway.stimulicollector.HealthcareServiceTwinStimuliCollector;
-import net.fhirfactory.pegacorn.ladon.statespace.twinpathway.stimulicollector.common.TwinStimuliCollectorBase;
-import net.fhirfactory.pegacorn.ladon.statespace.twinpathway.twinorchestrator.HealthcareServiceTwinOrchestrator;
-import net.fhirfactory.pegacorn.ladon.statespace.twinpathway.twinorchestrator.common.TwinOrchestratorBase;
+import net.fhirfactory.pegacorn.ladon.statespace.twinpathway.provocations.workers.HealthcareServiceTwinTypeProvocationWUP;
+import net.fhirfactory.pegacorn.ladon.statespace.twinpathway.provocations.workers.base.TwinTypeProvocationArchetypeWUP;
+import net.fhirfactory.pegacorn.ladon.statespace.twinpathway.orchestrator.HealthcareServiceTwinOrchestrator;
+import net.fhirfactory.pegacorn.ladon.statespace.twinpathway.orchestrator.common.TwinOrchestratorBase;
 
 import javax.inject.Inject;
 
 abstract public class HealthcareServiceCentricStimuliBasedBehaviour extends GenericStimuliBasedBehaviour {
     @Inject
-    HealthcareServiceTwinStimuliCollector stimuliCollectorService;
+    HealthcareServiceTwinTypeProvocationWUP stimuliCollectorService;
 
     @Inject
     HealthcareServiceTwinOrchestrator orchestratorService;
 
     @Override
-    protected TwinStimuliCollectorBase getMyCollectorService() {
+    protected TwinTypeProvocationArchetypeWUP getMyCollectorService() {
         return stimuliCollectorService;
     }
 

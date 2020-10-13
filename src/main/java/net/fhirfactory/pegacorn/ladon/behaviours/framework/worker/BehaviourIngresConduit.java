@@ -23,7 +23,7 @@
 package net.fhirfactory.pegacorn.ladon.behaviours.framework.worker;
 
 import net.fhirfactory.pegacorn.ladon.behaviours.framework.model.BehaviourRouteNames;
-import net.fhirfactory.pegacorn.ladon.statespace.stimuli.model.StimulusPackage;
+import net.fhirfactory.pegacorn.ladon.statespace.stimuli.model.Stimulus;
 import net.fhirfactory.pegacorn.petasos.core.moa.pathway.naming.PetasosPathwayExchangePropertyNames;
 import org.apache.camel.Exchange;
 import org.slf4j.Logger;
@@ -51,7 +51,7 @@ public class BehaviourIngresConduit {
      * @param behaviourName The Behaviour name - an absolutely unique name for the instance of the Behaviour within the entiry deployment.
      * @return A Stimulus object for injecting into other Behaviours
      */
-    public StimulusPackage injectStimulus(StimulusPackage incomingStimulusPackage, Exchange camelExchange, String behaviourName){
+    public Stimulus injectStimulus(Stimulus incomingStimulusPackage, Exchange camelExchange, String behaviourName){
         LOG.debug(".injectStimulus(): Entry, incomingStimulus (Stimulus) --> {}, behaviourName (String) --> {}", incomingStimulusPackage, behaviourName);
         BehaviourRouteNames frameworkRouteEndpointNames = new BehaviourRouteNames(behaviourName);
         //

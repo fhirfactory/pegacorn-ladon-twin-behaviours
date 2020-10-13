@@ -24,12 +24,12 @@ package net.fhirfactory.pegacorn.ladon.behaviours.framework.model;
 public class BehaviourRouteNames {
     private String behaviourName;
 
-    private static String BEHAVIOUR_INGRES_CONDUIT_INGRES_POINT = ".IngresConduit.Ingres";
-    private static String BEHAVIOUR_INGRES_CONDUIT_EGRESS_POINT = ".IngresConduit.Egress";
-    private static String BEHAVIOUR_EGRESS_CONDUIT_INGRES_POINT = ".EgressConduit.Ingres";
-    private static String BEHAVIOUR_EGRESS_CONDUIT_EGRESS_POINT = ".EgressConduit.Egress";
-    private static String BEHAVIOUR_INGRES_POINT = ".Ingres";
-    private static String BEHAVIOUR_EGRESS_POINT = ".Egress";
+    private static String BEHAVIOUR_INGRES_CONDUIT_INGRES_POINT = ".Behaviour.IngresConduit.Ingres";
+    private static String BEHAVIOUR_INGRES_CONDUIT_EGRESS_POINT = ".Behaviour.IngresConduit.Egress";
+    private static String BEHAVIOUR_EGRESS_CONDUIT_INGRES_POINT = ".Behaviour.EgressConduit.Ingres";
+    private static String BEHAVIOUR_EGRESS_CONDUIT_EGRESS_POINT = ".Behaviour.EgressConduit.Egress";
+    private static String BEHAVIOUR_INGRES_POINT = ".Behaviour.Ingres";
+    private static String BEHAVIOUR_EGRESS_POINT = ".Behaviour.Egress";
 
     public BehaviourRouteNames(String behaviourName){
         this.behaviourName = behaviourName;
