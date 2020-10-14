@@ -21,17 +21,14 @@
  */
 package net.fhirfactory.pegacorn.ladon.behaviours.framework.worker;
 
-import net.fhirfactory.pegacorn.ladon.behaviours.framework.model.BehaviourRouteNames;
-import net.fhirfactory.pegacorn.petasos.core.moa.pathway.interchange.worker.InterchangeTargetWUPTypeRouter;
-import net.fhirfactory.pegacorn.petasos.core.moa.pathway.interchange.worker.InterchangeUoWPayload2NewUoWProcessor;
-import net.fhirfactory.pegacorn.petasos.core.moa.pathway.naming.RouteElementNames;
-import net.fhirfactory.pegacorn.petasos.model.topology.NodeElement;
 import org.apache.camel.CamelContext;
-import org.apache.camel.builder.RouteBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class BehaviourRouteFrameworkTemplate extends RouteBuilder {
+import net.fhirfactory.pegacorn.camel.BaseRouteBuilder;
+import net.fhirfactory.pegacorn.ladon.behaviours.framework.model.BehaviourRouteNames;
+
+public class BehaviourRouteFrameworkTemplate extends BaseRouteBuilder {
 
     private static final Logger LOG = LoggerFactory.getLogger(BehaviourRouteFrameworkTemplate.class);
 
@@ -51,20 +48,20 @@ public class BehaviourRouteFrameworkTemplate extends RouteBuilder {
         LOG.debug("BehaviourRouteFrameworkTemplate::configure(): BehaviourIngresConduitIngresPoint --> {}", nameSet.getBehaviourIngresConduitIngresPoint());
         LOG.debug("BehaviourRouteFrameworkTemplate::configure(): BehaviourEgressConduitEgressPoint --> {}", nameSet.getBehaviourEgressConduitEgressPoint());
 
-        from(nameSet.getBehaviourIngresConduitIngresPoint())
+        fromWithStandardExceptionHandling(nameSet.getBehaviourIngresConduitIngresPoint())
                 .routeId(nameSet.getRouteNameIngresConduitIngres2IngresConduitEgress())
                 .bean(BehaviourIngresConduit.class, "injectStimulus(*, Exchange," + this.getBehaviourName() + ")")
                 .to(nameSet.getBehaviourIngresConduitEgressPoint());
 
-        from(nameSet.getBehaviourIngresConduitEgressPoint())
+        fromWithStandardExceptionHandling(nameSet.getBehaviourIngresConduitEgressPoint())
                 .routeId(nameSet.getRouteNameIngressConduitEgress2BehaviourIngres())
                 .to(nameSet.getBehaviourIngresPoint());
 
-        from(nameSet.getBehaviourEgressPoint())
+        fromWithStandardExceptionHandling(nameSet.getBehaviourEgressPoint())
                 .routeId(nameSet.getRouteNameBehaviourEgress2EgressConduitIngres())
                 .to(nameSet.getBehaviourEgressConduitIngresPoint());
 
-        from(nameSet.getBehaviourEgressConduitIngresPoint())
+        fromWithStandardExceptionHandling(nameSet.getBehaviourEgressConduitIngresPoint())
                 .routeId(nameSet.getRouteNameEgressConduitIngres2EgressConduitEgress())
                 .bean(BehaviourEgressConduit.class, "extractStimulus(*, Exchange," +  this.getBehaviourName() + ")");
     }
