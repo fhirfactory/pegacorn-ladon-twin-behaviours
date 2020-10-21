@@ -19,26 +19,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.fhirfactory.pegacorn.ladon.behaviours.framework.worker;
+package net.fhirfactory.pegacorn.ladon.behaviours.framework.worker.common;
 
-import net.fhirfactory.pegacorn.ladon.behaviours.framework.model.BehaviourRouteNames;
-import net.fhirfactory.pegacorn.petasos.core.moa.pathway.interchange.worker.InterchangeTargetWUPTypeRouter;
-import net.fhirfactory.pegacorn.petasos.core.moa.pathway.interchange.worker.InterchangeUoWPayload2NewUoWProcessor;
-import net.fhirfactory.pegacorn.petasos.core.moa.pathway.naming.RouteElementNames;
-import net.fhirfactory.pegacorn.petasos.model.topology.NodeElement;
+import net.fhirfactory.pegacorn.ladon.model.behaviours.BehaviourRouteNames;
 import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class BehaviourRouteFrameworkTemplate extends RouteBuilder {
+public abstract class StimulusBasedBehaviourRouteFrameworkTemplate extends RouteBuilder {
 
-    private static final Logger LOG = LoggerFactory.getLogger(BehaviourRouteFrameworkTemplate.class);
+    private static final Logger LOG = LoggerFactory.getLogger(StimulusBasedBehaviourRouteFrameworkTemplate.class);
 
     private String behaviourName;
     private BehaviourRouteNames nameSet;
 
-    public BehaviourRouteFrameworkTemplate(CamelContext context, String behaviourName) {
+    public StimulusBasedBehaviourRouteFrameworkTemplate(CamelContext context, String behaviourName) {
         super(context);
         LOG.debug(".InterchangeExtractAndRouteTemplate(): Entry, context --> ###, behaviourName (String) --> {}", behaviourName);
         this.behaviourName = behaviourName;
@@ -47,9 +43,9 @@ public class BehaviourRouteFrameworkTemplate extends RouteBuilder {
 
     @Override
     public void configure() {
-        LOG.debug("BehaviourRouteFrameworkTemplate::configure(): Entry!, for wupNodeElement --> {}", behaviourName);
-        LOG.debug("BehaviourRouteFrameworkTemplate::configure(): BehaviourIngresConduitIngresPoint --> {}", nameSet.getBehaviourIngresConduitIngresPoint());
-        LOG.debug("BehaviourRouteFrameworkTemplate::configure(): BehaviourEgressConduitEgressPoint --> {}", nameSet.getBehaviourEgressConduitEgressPoint());
+        LOG.debug("StimulusBasedBehaviourRouteFrameworkTemplate::configure(): Entry!, for wupNodeElement --> {}", behaviourName);
+        LOG.debug("StimulusBasedBehaviourRouteFrameworkTemplate::configure(): BehaviourIngresConduitIngresPoint --> {}", nameSet.getBehaviourIngresConduitIngresPoint());
+        LOG.debug("StimulusBasedBehaviourRouteFrameworkTemplate::configure(): BehaviourEgressConduitEgressPoint --> {}", nameSet.getBehaviourEgressConduitEgressPoint());
 
         from(nameSet.getBehaviourIngresConduitIngresPoint())
                 .routeId(nameSet.getRouteNameIngresConduitIngres2IngresConduitEgress())

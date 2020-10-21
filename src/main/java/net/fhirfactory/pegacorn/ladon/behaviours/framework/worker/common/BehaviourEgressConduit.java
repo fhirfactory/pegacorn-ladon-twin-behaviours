@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Mark A. Hunter
+ * Copyright (c) 2020 Mark A. Hunter (ACT Health)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -19,13 +19,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.fhirfactory.pegacorn.ladon.behaviours.archetypes.common;
 
-import net.fhirfactory.pegacorn.ladon.model.behaviours.BehaviourTypeEnum;
-import org.apache.camel.builder.RouteBuilder;
+package net.fhirfactory.pegacorn.ladon.behaviours.framework.worker.common;
 
-abstract public class GenericTimerBasedBehaviour extends GenericBehaviour {
+import net.fhirfactory.pegacorn.ladon.model.behaviours.BehaviourRouteNames;
+import net.fhirfactory.pegacorn.ladon.processingplant.LadonProcessingPlant;
+import net.fhirfactory.pegacorn.petasos.core.moa.pathway.naming.PetasosPathwayExchangePropertyNames;
+import org.slf4j.Logger;
 
-    @Override
-    protected BehaviourTypeEnum specifyBehaviourType(){return(BehaviourTypeEnum.STIMULI_BASED_BEHAVIOUR);}
+import javax.inject.Inject;
+
+/**
+ * @author Mark A. Hunter
+ * @since 2020-09-20
+ */
+
+public abstract class BehaviourEgressConduit {
+    abstract protected Logger getLogger();
+
+
+    @Inject
+    private LadonProcessingPlant ladonServices;
+
+    protected LadonProcessingPlant getLadonServices(){return(ladonServices);}
+
+
 }
